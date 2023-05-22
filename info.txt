@@ -1,2 +1,0 @@
-# Generic
-pip install pynvim
