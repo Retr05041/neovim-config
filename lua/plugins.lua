@@ -21,12 +21,14 @@ return require('packer').startup(function(use)
 	-- Github Co-pilot (setup is `:Copilot setup`)
 	use {'github/copilot.vim'}
 
-	-- Telescope
+	-- I have no idea what treesitter does, but it is incredibly important
+    	-- Mostly, it provides better syntax highlighting but i believe it also exposes a bunch of language endpoints to the lsp
+    	-- It's practically natively supported in neovim and is a dependency for almost everything so I'm just dropping it at the top node
 	use {
 	'nvim-telescope/telescope.nvim', tag = '0.1.1',
 	requires = { {'nvim-lua/plenary.nvim'} }
 	}
-	
+
 	-- Tree
 	use {
 	'nvim-tree/nvim-tree.lua',
@@ -35,4 +37,10 @@ return require('packer').startup(function(use)
 	
 	-- Theme
 	use {'Mofiqul/dracula.nvim', as = 'dracula'}
+
+	-- Automatically set up your configuration after cloning packer.nvim
+    	-- Put this at the end after all plugins
+    	if packer_bootstrap then
+        	require('packer').sync()
+    	end
 end)
