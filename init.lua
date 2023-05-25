@@ -3,8 +3,11 @@
 -- Keymaps
 require('keymaps')
 
+-- Nvim Options
+require('options')
+
 -- Packer plugins
 require('plugins')
 
--- Setups
+-- Plugin Setups
 require('setup')

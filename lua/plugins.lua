@@ -1,16 +1,24 @@
 -- This file can be loaded by calling `require('plugins')` from your init.lua
 -- When editing this file, run the command `source %`
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+-- Bootstrap packer.nvim if it doesn't exist
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
+end
 
--- disable netrw - for nvim-tree 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups - for nvim-tree
-vim.opt.termguicolors = true
+-- Run the bootstrap function
+local packer_bootstrap = ensure_packer()
 
+
+-- Plugins
 return require('packer').startup(function(use)
 	-- Use the base packer before anything else
 	use 'wbthomason/packer.nvim'
