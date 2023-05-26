@@ -45,6 +45,12 @@ return require('packer').startup(function(use)
 	
 	-- Theme
 	use {'Mofiqul/dracula.nvim', as = 'dracula'}
+	
+	-- Ultisnips
+	use {
+	'SirVer/ultisnips',
+	requires = {{'honza/vim-snippets'}}
+	}
 
 	-- Automatically set up your configuration after cloning packer.nvim
     	-- Put this at the end after all plugins
