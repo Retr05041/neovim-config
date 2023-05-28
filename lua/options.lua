@@ -6,3 +6,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable true colors support
 vim.opt.termguicolors = true
+
+-- set numbers
+vim.opt.number = true

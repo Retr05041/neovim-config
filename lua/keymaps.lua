@@ -8,7 +8,10 @@ vim.keymap.set("n", '<leader>ps', ':PackerSync<CR>')
 vim.keymap.set("n", '<leader>s', ':Telescope find_files<CR>')
 
 -- NvimTree keymap
-vim.keymap.set("n", '<leader>t', ':NvimTreeToggle<CR>')
+vim.keymap.set("n", '<leader>d', ':NvimTreeToggle<CR>')
 
 -- UltiSnips keymap
 vim.keymap.set("n", '<leader>u', ':UltiSnipsEdit<CR>')
+
+-- Terminal
+vim.keymap.set("n", '<leader>t', ':ToggleTerm<CR>')
