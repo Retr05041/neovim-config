@@ -2,6 +2,9 @@
 
 # BeSmart - A simple script to help you setup
 
+# Dependancies:
+########################################
+
 # Boolean var
 dependancyFailure=false
 
@@ -15,10 +18,12 @@ if ! [ -x "$(command -v nvim)" ]; then
     echo 'Installing Neovim...'
     wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
     tar -xzf nvim-linux64.tar.gz
-    cp -r nvim-linux64/bin/* /usr/local/bin/
+    sudo cp -r nvim-linux64/bin/* /usr/bin/
     rm -rf nvim-linux64.tar.gz nvim-linux64
     dependancyFailure=false
     echo "Done!"
+  else
+    echo "Skipping..."
   fi
 fi
 
@@ -32,10 +37,12 @@ if ! [ -x "$(command -v node)" ]; then
     echo 'Installing Node.js...'
     wget https://nodejs.org/dist/v20.11.0/node-v20.11.0-linux-x64.tar.xz
     tar -xJf node-v20.11.0-linux-x64.tar.xz
-    cp -r node-v20.11.0-linux-x64/bin/node /usr/local/bin/
+    sudo cp -r node-v20.11.0-linux-x64/bin/node /usr/bin/
     rm -rf node-v20.11.0-linux-x64.tar.xz node-v20.11.0-linux-x64
     dependancyFailure=false
-    echo "Done!"
+    echo "Node successfully installed!"
+  else
+    echo "Skipping..."
   fi
 fi
 
@@ -45,7 +52,7 @@ if ! [ -x "$(command -v python3)" ]; then
   dependancyFailure=true
 fi
 # Check if pynvim file exists
-if ! [ -f "$HOME/.local/share/nvim/site/pack/packer/start/pynvim/plugin/pynvim.py" ]; then
+if ! [ -d "/usr/lib/python3/dist-packages/pynvim" ]; then
   echo 'Error: pynvim is not installed.'
   dependancyFailure=true
   read -p "Automatically install latest version? [y/n]: " response
@@ -53,9 +60,11 @@ if ! [ -f "$HOME/.local/share/nvim/site/pack/packer/start/pynvim/plugin/pynvim.p
   then
     echo 'Installing pynvim...'
     pip3 install pynvim
+    echo "pynvim successfully installed!"
+  else
+    echo "Skipping..."
   fi
 fi
-
 
 # Sanity check dependancies
 if [ "$dependancyFailure" = true ]; then
@@ -63,22 +72,98 @@ if [ "$dependancyFailure" = true ]; then
   exit 1
 fi
 
-# Check if Neovim config directory exists and remove it
-if [ -d "$HOME/.config/nvim" ]; then
-  echo 'Removing existing Neovim config directory...'
-  rm -rf $HOME/.config/nvim
-fi
+# Configuring Neovim
+########################################
 
-# Create Neovim config directory
-echo 'Creating Neovim config directory...'
-mkdir -p $HOME/.config/nvim
-# Copy init.vim, lua/, and UltiSnips/ to Neovim config directory - $HOME/.config/nvim
-echo 'Copying init.lua, lua/, and UltiSnips/ to Neovim config directory...'
-cp -r init.lua $HOME/.config/nvim
-cp -r lua $HOME/.config/nvim
-cp -r UltiSnips $HOME/.config/nvim
+migrate_config () {
+  # Check if Neovim config directory exists and remove it
+  if [ -d "$HOME/.config/nvim" ]; then
+    echo 'Removing existing Neovim config directory...'
+    rm -rf $HOME/.config/nvim
+  fi
 
-# Finishing up
-echo 'Done!'
-echo 'Run :PackerInstall inside Neovim to install plugins'
+  # Check if Neovim "data" directory exists and remove it
+  if [ -d "$HOME/.local/share/nvim" ]; then
+    echo 'Removing existing Neovim "data" directory...'
+    rm -rf $HOME/.local/share/nvim
+  fi
 
+  # Create Neovim config directory
+  echo 'Creating Neovim config directory...'
+  mkdir -p $HOME/.config/nvim
+  # Copy init.vim, lua/, and UltiSnips/ to Neovim config directory - $HOME/.config/nvim
+  echo 'Copying init.lua, lua/, and UltiSnips/ to Neovim config directory...'
+  cp -r init.lua $HOME/.config/nvim
+  cp -r lua $HOME/.config/nvim
+  cp -r UltiSnips $HOME/.config/nvim
+  echo ""
+  echo "Migration Successful! - You will need to run nvim twice for the changes to take effect."
+}
+
+clean () {
+  # Check if Neovim config directory exists and remove it
+  if [ -d "$HOME/.config/nvim" ]; then
+    echo 'Removing existing Neovim config directory...'
+    rm -rf $HOME/.config/nvim
+  fi
+
+  # Check if Neovim "data" directory exists and remove it
+  if [ -d "$HOME/.local/share/nvim" ]; then
+    echo 'Removing existing Neovim "data" directory...'
+    rm -rf $HOME/.local/share/nvim
+  fi
+
+  # Check if Neovim is in /usr/bin and remove it
+  if [ -f "/usr/bin/nvim" ]; then
+    echo 'Removing existing Neovim...'
+    sudo rm -rf /usr/bin/nvim
+  fi
+
+  # Check if Node.js is in /usr/bin and remove it
+  if [ -f "/usr/bin/node" ]; then
+    echo 'Removing existing Node.js...'
+    sudo rm -rf /usr/bin/node
+  fi
+}
+
+font_setup () {
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
+  unzip Hack.zip -d NerdFonts
+  mkdir -p /usr/share/fonts/NerdFonts
+  sudo cp -r NerdFonts/HackNerdFont-Regular.ttf /usr/share/fonts/NerdFonts
+  rm -rf Hack.zip NerdFonts LICENSE.md
+  fc-cache -fv
+  echo "Font setup complete! - Be sure to change your terminal's font to 'Hack Nerd Font Regular'."
+}
+
+user_input () {
+  echo ""
+  echo "Please select what you would like to do? "
+  echo "1. Migrate repo config ~ THIS WILL WIPE YOUR CURRENT CONFIG"
+  echo "2. Clean ~ This will remove everything"
+  echo "3. Setup Fonts ~ Needed for nvim-tree to display icons"
+  echo "4. Exit"
+
+  read -p "Enter your choice: " choice
+
+  case $choice in
+    1) 
+      migrate_config 
+      ;;
+    2) 
+      clean 
+      ;;
+    3)
+      font_setup
+      ;;
+    4) 
+      echo "Exiting..." 
+      exit 0
+      ;;
+    *) 
+      echo "Invalid choice" 
+      user_input
+      ;;
+  esac
+}
+user_input

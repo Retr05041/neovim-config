@@ -1,12 +1,12 @@
 -- Default directory it sees is 'lua'
 
--- Keymaps
+-- Keymaps setup
 require('keymaps')
 
--- Nvim Options
+-- Default Neovim Setting Options
 require('options')
 
--- Packer plugins
+-- Packer plugin initialization
 require('plugins')
 
 -- Plugin Setups

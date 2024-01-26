@@ -1,10 +1,10 @@
 -- NeoVim options
 
--- disable netrw - for nvim-tree
+-- disable netrw - for "nvim-tree"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable true colors support
+-- set termguicolors to enable true colors support (Dracula, Bufferline)
 vim.opt.termguicolors = true
 
 -- set numbers
