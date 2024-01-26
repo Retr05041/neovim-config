@@ -43,8 +43,9 @@ if ! [ -x "$(command -v node)" ]; then
     echo "Exporting PATH..."
     echo "export PATH=\"/usr/bin/node-v20.11.0-linux-x64/bin:\$PATH\"" >> $HOME/.bashrc
     rm -rf node-v20.11.0-linux-x64.tar.xz node-v20.11.0-linux-x64
+    npm install -g neovim
     dependancyFailure=false
-    echo "Node successfully installed!"
+    echo "Node & neovim dependancy successfully installed!"
   else
     echo "Skipping..."
   fi
@@ -56,15 +57,16 @@ if ! [ -x "$(command -v python3)" ]; then
   dependancyFailure=true
 fi
 # Check if pynvim file exists
-if ! [ -d "/usr/lib/python3/dist-packages/pynvim" ]; then
-  echo 'Error: pynvim is not installed.'
+if pip3 freeze | grep -q "pynvim=0.5.0" || pip3 freeze | grep -q "neovim=0.3.1"; then
+  echo 'Error: the Python3 packages pynvim or neovim are not installed.'
   dependancyFailure=true
-  read -p "Automatically install latest version? [y/n]: " response
+  read -p "Automatically install latest version(s)? [y/n]: " response
   if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
   then
-    echo 'Installing pynvim...'
+    echo 'Installing packages...'
     pip3 install pynvim
-    echo "pynvim successfully installed!"
+    pip3 install neovim
+    echo "packages successfully installed!"
   else
     echo "Skipping..."
   fi
