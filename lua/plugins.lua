@@ -27,20 +27,25 @@ return require('packer').startup(function(use)
 	use {'Mofiqul/dracula.nvim', as = 'dracula'}
 
 	-- General language parser
-	-- use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+	use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
 	
 	-- Github Co-pilot (setup is `:Copilot setup`)
-	-- use {'github/copilot.vim'}
+	use {'github/copilot.vim'}
 
-	-- I have no idea what treesitter does, but it is incredibly important
-    	-- Mostly, it provides better syntax highlighting but i believe it also exposes a bunch of language endpoints to the lsp
-    	-- It's practically natively supported in neovim and is a dependency for almost everything so I'm just dropping it at the top node
-	-- use {
-	-- 'nvim-telescope/telescope.nvim', tag = '0.1.1',
-	-- requires = { {'nvim-lua/plenary.nvim'} }
-	-- }
+	-- Telescope Files
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.5',
+	  -- or                            , branch = '0.1.x',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	  }
 
-	-- Tree + Icons
+	-- Dir Tree + Icons
 	use {
 	'nvim-tree/nvim-tree.lua',
 	requires = {{'nvim-tree/nvim-web-devicons'}}
@@ -48,20 +53,13 @@ return require('packer').startup(function(use)
 	use 'nvim-tree/nvim-web-devicons'
 
 	-- Bufferline
-	-- use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+	use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
 	
 	-- -- Ultisnips
-	-- use {
-	-- 'SirVer/ultisnips',
-	-- requires = {{'honza/vim-snippets'}}
-	-- }
-
-	-- Terminal
-	-- use {
-	-- 'akinsho/toggleterm.nvim', tag = '*', config = function()
-  	-- require("toggleterm").setup()
-	-- end
-	-- }
+	use {
+	'SirVer/ultisnips',
+	requires = {{'honza/vim-snippets'}}
+	}
 
 	-- Automatically set up your configuration after cloning packer.nvim
     	-- Put this at the end after all plugins

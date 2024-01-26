@@ -18,10 +18,12 @@ if ! [ -x "$(command -v nvim)" ]; then
     echo 'Installing Neovim...'
     wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
     tar -xzf nvim-linux64.tar.gz
-    sudo cp -r nvim-linux64/bin/* /usr/bin/
+    sudo cp -a nvim-linux64/ /usr/bin/
+    echo "Exporting PATH..."
+    echo "export PATH=\"/usr/bin/nvim-linux64/bin:\$PATH\"" >> $HOME/.bashrc
     rm -rf nvim-linux64.tar.gz nvim-linux64
     dependancyFailure=false
-    echo "Done!"
+    echo "Neovim successfully installed!"
   else
     echo "Skipping..."
   fi
@@ -37,7 +39,9 @@ if ! [ -x "$(command -v node)" ]; then
     echo 'Installing Node.js...'
     wget https://nodejs.org/dist/v20.11.0/node-v20.11.0-linux-x64.tar.xz
     tar -xJf node-v20.11.0-linux-x64.tar.xz
-    sudo cp -r node-v20.11.0-linux-x64/bin/node /usr/bin/
+    sudo cp -a node-v20.11.0-linux-x64/ /usr/bin/
+    echo "Exporting PATH..."
+    echo "export PATH=\"/usr/bin/node-v20.11.0-linux-x64/bin:\$PATH\"" >> $HOME/.bashrc
     rm -rf node-v20.11.0-linux-x64.tar.xz node-v20.11.0-linux-x64
     dependancyFailure=false
     echo "Node successfully installed!"
@@ -114,15 +118,15 @@ clean () {
   fi
 
   # Check if Neovim is in /usr/bin and remove it
-  if [ -f "/usr/bin/nvim" ]; then
+  if [ -d "/usr/bin/nvim-linux64" ]; then
     echo 'Removing existing Neovim...'
-    sudo rm -rf /usr/bin/nvim
+    sudo rm -rf /usr/bin/nvim-linux64
   fi
 
   # Check if Node.js is in /usr/bin and remove it
-  if [ -f "/usr/bin/node" ]; then
+  if [ -d "/usr/bin/node-v20.11.0-linux-x64" ]; then
     echo 'Removing existing Node.js...'
-    sudo rm -rf /usr/bin/node
+    sudo rm -rf /usr/bin/node-v20.11.0-linux-x64
   fi
 }
 
