@@ -56,8 +56,9 @@ if ! [ -x "$(command -v python3)" ]; then
   echo 'Error: Python3 is not installed.'
   dependancyFailure=true
 fi
+
 # Check if pynvim file exists
-if pip3 freeze | grep -q "pynvim=0.5.0" || pip3 freeze | grep -q "neovim=0.3.1"; then
+if [ pip3 freeze | grep -q "pynvim" ] && [ pip3 freeze | grep -q "neovim" ]; then
   echo 'Error: the Python3 packages pynvim or neovim are not installed.'
   dependancyFailure=true
   read -p "Automatically install latest version(s)? [y/n]: " response
