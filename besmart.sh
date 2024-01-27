@@ -45,7 +45,7 @@ if ! [ -x "$(command -v node)" ]; then
     rm -rf node-v20.11.0-linux-x64.tar.xz node-v20.11.0-linux-x64
     npm install -g neovim
     dependancyFailure=false
-    echo "Node & neovim dependancy successfully installed!"
+    echo "Node & Neovim dependancy successfully installed!"
   else
     echo "Skipping..."
   fi
@@ -57,17 +57,33 @@ if ! [ -x "$(command -v python3)" ]; then
   dependancyFailure=true
 fi
 
-# Check if pynvim file exists
-if [ pip3 freeze | grep -q "pynvim" ] && [ pip3 freeze | grep -q "neovim" ]; then
-  echo 'Error: the Python3 packages pynvim or neovim are not installed.'
+# Check if pynvim library is installed
+if [ "$(pip3 freeze | grep -q \"pynvim\")" ]; then
+  echo 'Error: the Python3 package pynvim is not installed.'
   dependancyFailure=true
-  read -p "Automatically install latest version(s)? [y/n]: " response
+  read -p "Automatically install latest version from pip3? [y/n]: " response
   if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
   then
-    echo 'Installing packages...'
+    echo 'Installing package...'
     pip3 install pynvim
+    echo "package successfully installed!"
+    dependancyFailure=false
+  else
+    echo "Skipping..."
+  fi
+fi
+
+# Check if neovim library is installed
+if [ "$(pip3 freeze | grep -q \"neovim\")" ]; then
+  echo 'Error: the Python3 package neovim is not installed.'
+  dependancyFailure=true
+  read -p "Automatically install latest version from pip3? [y/n]: " response
+  if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+  then
+    echo 'Installing package...'
     pip3 install neovim
-    echo "packages successfully installed!"
+    echo "package successfully installed!"
+    dependancyFailure=false
   else
     echo "Skipping..."
   fi
