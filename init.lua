@@ -1,13 +1,21 @@
--- Default directory it sees is 'lua'
+-- <leader> = \
+-- <CR> = enter (remove if you need confirmation before running a command)
 
--- Keymaps setup
-require('keymaps')
+-- lazy.nvim package manager setup
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Default Neovim Setting Options
-require('options')
-
--- Packer plugin initialization
-require('plugins')
-
--- Plugin Setups
-require('setup')
+-- Default vim config
+require("vim-options")
+-- Load Plugins
+require("lazy").setup("plugins")

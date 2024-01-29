@@ -118,7 +118,7 @@ migrate_config () {
   echo 'Copying init.lua, lua/, and UltiSnips/ to Neovim config directory...'
   cp -r init.lua $HOME/.config/nvim
   cp -r lua $HOME/.config/nvim
-  cp -r UltiSnips $HOME/.config/nvim
+  # cp -r UltiSnips $HOME/.config/nvim
   echo ""
   echo "Migration Successful! - You will need to run nvim twice for the changes to take effect."
 }
