@@ -8,5 +8,5 @@ My Neovim config
 List of plugins installed:
 - TBD
 
-## Keybinds
-Check `lua/keymaps.lua` to get a list of custom keybinds for the plugins
+## Keybindings
+- TBD
