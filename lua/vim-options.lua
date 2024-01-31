@@ -20,4 +20,5 @@ vim.opt.number = true
 
 -- Tab spacing
 vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
