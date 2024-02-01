@@ -12,7 +12,7 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 -- Specify which language servers you want installed
-                ensure_installed = { "lua_ls", "bashls", "clangd", "cmake", "html", "cssls", "sqlls", "yamlls" }
+                ensure_installed = { "lua_ls", "bashls", "clangd", "cmake", "html", "cssls", "sqlls", "yamlls", "gopls" }
             })
         end
     },
@@ -29,6 +29,7 @@ return {
 						lspconfig.cssls.setup {}
 						lspconfig.sqlls.setup {}
 						lspconfig.yamlls.setup {}
+                        lspconfig.gopls.setup {}
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
         end
     }

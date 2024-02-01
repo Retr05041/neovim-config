@@ -108,7 +108,7 @@ migrate_config () {
   echo "Creating Neovim config directory..."
   mkdir -p $HOME/.config/nvim
   # Copy init.vim, lua/, and UltiSnips/ to Neovim config directory - $HOME/.config/nvim
-  echo "Copying init.lua, lua/, and UltiSnips/ to Neovim config directory..."
+  echo "Copying init.lua, and lua/ to Neovim config directory..."
   cp -r init.lua $HOME/.config/nvim
   cp -r lua $HOME/.config/nvim
   # cp -r UltiSnips $HOME/.config/nvim
