@@ -29,8 +29,10 @@ return {
 						lspconfig.cssls.setup {}
 						lspconfig.sqlls.setup {}
 						lspconfig.yamlls.setup {}
-                        lspconfig.gopls.setup {}
+            lspconfig.gopls.setup {}
+            -- Keymaps for LSP
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+            vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {})
         end
     }
 }
