@@ -1,4 +1,4 @@
 -- Plugin lua table
 
-return {
-}
+return {}
+
