@@ -10,3 +10,8 @@ List of plugins installed:
 
 ## Keybindings
 - TBD
+
+## TODO
+- [ ] Change out luasnips for ultisnips (possibly...)
+- [ ] Possibly change theme
+- [ ] Possibly find new terminal emulator...
