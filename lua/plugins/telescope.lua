@@ -1,4 +1,4 @@
--- Language Parsing tool and highlighter
+-- Language Parsing tool and highlighter (Search through working directory by file or by word - also allows dropdowns)
 
 return {
   {

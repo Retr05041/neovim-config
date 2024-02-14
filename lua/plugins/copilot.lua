@@ -1,6 +1,6 @@
 -- Github Copilot (:Copilot setup)
 
 return {
-  "github/copilot.vim",
+  -- "github/copilot.vim",
 }
 
