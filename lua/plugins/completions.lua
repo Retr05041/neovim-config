@@ -17,7 +17,7 @@ return {
         config = function()
             local cmp = require('cmp')
             require("luasnip.loaders.from_vscode").lazy_load() -- Uses luasnip for autocompleting snippits
-
+            
             cmp.setup({
                 snippet = {
                 -- REQUIRED - you must specify a snippet engine
@@ -26,8 +26,8 @@ return {
                 end,
                 },
                 window = { -- Window options
-                -- completion = cmp.config.window.bordered(),
-                -- documentation = cmp.config.window.bordered(),
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({ -- Keybinds
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
