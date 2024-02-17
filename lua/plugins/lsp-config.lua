@@ -13,7 +13,8 @@ return {
       require("mason-lspconfig").setup({
         -- Specify which language servers you want installed (be sure to add to treesitter.lua)
         ensure_installed = {
-          -- "lua_ls", -- Lua
+          "jsonls", -- JSON
+          "lua_ls", -- Lua
           -- "bashls", -- Bash
           -- "clangd", -- C/C++
           -- "csharp_ls", -- C#
@@ -33,7 +34,8 @@ return {
       local lspconfig = require("lspconfig")
       -- Must do a setup for each installed language server
       -- Make sure to add the capabilities for completion
-      -- lspconfig.lua_ls.setup({capabilities=capabilities})
+      lspconfig.jsonls.setup({capabilities=capabilities})
+      lspconfig.lua_ls.setup({capabilities=capabilities})
       -- lspconfig.bashls.setup({capabilities=capabilities})
       -- lspconfig.clangd.setup({capabilities=capabilities})
       -- lspconfig.csharp_ls.setup({capabilities=capabilities})

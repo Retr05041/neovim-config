@@ -7,7 +7,7 @@ return {
 
     null_ls.setup({
       sources = {
-        -- null_ls.builtins.formatting.stylua, -- :Mason => /Stylua => {enter} => i
+        null_ls.builtins.formatting.stylua, -- :Mason => /Stylua => {enter} => i
       },
     })
 

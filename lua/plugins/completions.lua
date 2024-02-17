@@ -16,7 +16,7 @@ return {
         "hrsh7th/nvim-cmp",
         config = function()
             local cmp = require('cmp')
-            require("luasnip.loaders.from_vscode").lazy_load() -- Uses luasnip for autocompleting snippits
+            require("luasnip.loaders.from_snipmate").lazy_load() -- For custum snippets
             
             cmp.setup({
                 snippet = {
