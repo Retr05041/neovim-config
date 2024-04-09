@@ -82,6 +82,11 @@ if [ "$(pip3 freeze | grep -q \"neovim\")" ]; then
   fi
 fi
 
+# Check xclip is installed for Copy Paste features
+if ! [ -x "$(command -v xclip)" ]; then
+ sudo apt install xclip
+fi
+
 # Sanity check dependancies
 if [ "$dependancyFailure" = true ]; then
   echo "Error: Please install the dependancies listed above."

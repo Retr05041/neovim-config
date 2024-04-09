@@ -2,10 +2,10 @@
 vim.g.mapleader = " "
 
 -- Copy
-vim.keymap.set("n", "<leader>c", '"+y<CR>', { noremap = true, silent = true })
+vim.keymap.set("", "<leader>y", '"+y<CR>', { noremap = true, silent = true })
 
 -- Paste
-vim.keymap.set("n", "<leader>v", '"+p<CR>', { noremap = true, silent = true })
+vim.keymap.set("", "<leader>p", '"+p<CR>', { noremap = true, silent = true })
 
 -- Save
 vim.keymap.set("n", "<leader>s", ":w<CR>", { noremap = true, silent = true })
