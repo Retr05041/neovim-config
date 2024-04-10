@@ -13,6 +13,9 @@ vim.keymap.set("n", "<leader>s", ":w<CR>", { noremap = true, silent = true })
 -- Fast close
 vim.keymap.set("n", "<leader>w", ":q<CR>", { noremap = true, silent = true })
 
+-- Edit current file types snippets
+vim.keymap.set("n", "<leader>e", ":lua require(\"luasnip.loaders\").edit_snippet_files()<CR>", { noremap = true, silent = true})
+
 -- Show line numbers
 vim.opt.number = true
 
