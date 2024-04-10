@@ -121,6 +121,37 @@ migrate_config () {
   echo "Migration Successful! - You will need to run nvim twice for the changes to take effect."
 }
 
+migrate_snippets () {
+  if [ -d "$HOME/.config/nvim/snippets" ]; then
+    echo "Removing current snippets directory..."
+    rm -rf $HOME/.config/nvim/snippets
+  fi
+
+  echo "Migrating repo snippets to current config direcotry..."
+  cp -r snippets $HOME/.config/nvim
+  echo "Migration Successful! - Restart nvim for changes to take affect."
+}
+
+migrate_csnippets () {
+  if [ -d "snippets" ]; then
+    echo "Removing repo snippets directory..."
+    rm -rf snippets
+  fi
+
+  echo "Migrating current snippets to repo config directory..."
+  cp -r $HOME/.config/nvim/snippets .
+}
+
+font_setup () {
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
+  unzip Hack.zip -d NerdFonts
+  mkdir -p /usr/share/fonts/NerdFonts
+  sudo cp -r NerdFonts/HackNerdFont-Regular.ttf /usr/share/fonts/NerdFonts
+  rm -rf Hack.zip NerdFonts LICENSE.md
+  fc-cache -fv
+  echo "Font setup complete! - Be sure to change your terminal's font to \"Hack Nerd Font Regular\"."
+}
+
 clean () {
   # Check if Neovim config directory exists and remove it
   if [ -d "$HOME/.config/nvim" ]; then
@@ -149,23 +180,15 @@ clean () {
   fi
 }
 
-font_setup () {
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
-  unzip Hack.zip -d NerdFonts
-  mkdir -p /usr/share/fonts/NerdFonts
-  sudo cp -r NerdFonts/HackNerdFont-Regular.ttf /usr/share/fonts/NerdFonts
-  rm -rf Hack.zip NerdFonts LICENSE.md
-  fc-cache -fv
-  echo "Font setup complete! - Be sure to change your terminal's font to \"Hack Nerd Font Regular\"."
-}
-
 user_input () {
   echo ""
   echo "Please select what you would like to do? "
-  echo "1. Migrate repo config ~ THIS WILL WIPE YOUR CURRENT CONFIG"
-  echo "2. Clean ~ This will remove everything"
-  echo "3. Setup Fonts ~ Needed for nvim-tree to display icons"
-  echo "4. Exit"
+  echo "1. Migrate repo config ~ THIS WILL REPLACE CURRENT CONFIG"
+  echo "2. Migrate repo snippets ~ THIS WILL REPLACE CURRENT SNIPPETS"
+  echo "3. Migrate current snippets ~ THIS WILL REPLACE REPO SNIPPETS"
+  echo "4. Setup Fonts ~ Needed for nvim-tree to display icons (optional)"
+  echo "8. Clean ~ Remove everything added by script"
+  echo "9. Exit"
 
   read -p "Enter your choice: " choice
 
@@ -174,12 +197,18 @@ user_input () {
       migrate_config 
       ;;
     2) 
-      clean 
+      migrate_snippets
       ;;
     3)
+      migrate_csnippets
+      ;;
+    4)
       font_setup
       ;;
-    4) 
+    8)
+      clean
+      ;;
+    9) 
       echo "Exiting..." 
       exit 0
       ;;
