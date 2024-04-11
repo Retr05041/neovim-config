@@ -36,4 +36,3 @@ My Neovim config
 - Add this repo to Base configuration repo
 - Determine best selection of languages to have installed at base
 - Re-apply to github copilot
-- Add snippit exchange to setup script
