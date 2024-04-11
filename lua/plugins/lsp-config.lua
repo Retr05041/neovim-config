@@ -19,7 +19,7 @@ return {
           -- "clangd", -- C/C++
           -- "csharp_ls", -- C#
           "gopls", -- GO
-          "jedi_language_server", -- Python
+          "pyright", -- Python
         },
       })
     end,
@@ -41,7 +41,7 @@ return {
       -- lspconfig.clangd.setup({capabilities=capabilities})
       -- lspconfig.csharp_ls.setup({capabilities=capabilities})
       lspconfig.gopls.setup({capabilities=capabilities})
-      lspconfig.jedi_language_server.setup({capabilities=capabilities})
+      lspconfig.pyright.setup({capabilities=capabilities})
       -- Keymaps for LSP
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {})
