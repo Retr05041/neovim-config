@@ -15,11 +15,11 @@ return {
         ensure_installed = {
           "jsonls", -- JSON
           "lua_ls", -- Lua
-          -- "bashls", -- Bash
+          "bashls", -- Bash
           -- "clangd", -- C/C++
           -- "csharp_ls", -- C#
-          "gopls", -- GO
-          -- "pyright", -- Python
+          -- "gopls", -- GO
+          "pyright", -- Python
         },
       })
     end,
@@ -37,11 +37,11 @@ return {
       -- Make sure to add the capabilities for completion
       lspconfig.jsonls.setup({capabilities=capabilities})
       lspconfig.lua_ls.setup({capabilities=capabilities})
-      -- lspconfig.bashls.setup({capabilities=capabilities})
+      lspconfig.bashls.setup({capabilities=capabilities})
       -- lspconfig.clangd.setup({capabilities=capabilities})
       -- lspconfig.csharp_ls.setup({capabilities=capabilities})
-      lspconfig.gopls.setup({capabilities=capabilities})
-      -- lspconfig.pyright.setup({capabilities=capabilities})
+      -- lspconfig.gopls.setup({capabilities=capabilities})
+      lspconfig.pyright.setup({capabilities=capabilities})
       -- Keymaps for LSP
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {})
