@@ -1,4 +1,0 @@
--- Plugin lua table
-
-return {}
-
