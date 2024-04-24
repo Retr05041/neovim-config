@@ -25,7 +25,6 @@ migrate_config () {
   echo "Copying init.lua, and lua/ to Neovim config directory..."
   cp -r init.lua $HOME/.config/nvim
   cp -r lua $HOME/.config/nvim
-  cp -r snippets $HOME/.config/nvim
   echo ""
   echo "Migration Successful! - You will need to run nvim twice for the changes to take effect."
 }
