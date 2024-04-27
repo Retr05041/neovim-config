@@ -29,7 +29,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "bashls",
-                "jsonls",
                 "gopls",
                 "pyright",
                 "rust_analyzer",
