@@ -2,6 +2,8 @@
 
 # BeSmart - A simple script to help you setup
 
+# THIS CONFIG NEEDS NODE, NPM, AND RIPGREP
+
 # Configuring Neovim
 ########################################
 
