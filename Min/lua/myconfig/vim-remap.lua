@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- Open file explorer faster
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>t", vim.cmd.Ex)
 
 -- Copy to and from clipboard
 vim.keymap.set({"n", "v"}, "<leader>gy", '"+y<CR>', { noremap = true, silent = true })
