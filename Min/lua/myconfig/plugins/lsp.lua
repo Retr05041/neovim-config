@@ -32,6 +32,7 @@ return {
                 "gopls",
                 "pyright",
                 "rust_analyzer",
+                "taplo",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
